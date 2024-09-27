@@ -1,6 +1,10 @@
-# My Personal Project
+# Text Replacer
 
-## A subtitle
+## Project Overview
+
+This application will take three String inputs: a word/phrase to be replaced, a word/phrase to replace it with, and a body of text. **Every occurence of that word/phrase in the body text will be replaced by the replacer word/phrase.** You can add multiple words to replace for one body of text.
+
+This application is very versatile, but would be particularly useful for people who write many copies of **similarly written documents,** such as **job offer letters** or **report cards.** This project is of interest to me because as a Resident Advisor, I write many similar reports for each of my residents and could increase efficacy by replacing the names and relevant information on a pre-written template.
 
 A *bulleted* list:
 - item 1
