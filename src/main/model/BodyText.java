@@ -4,7 +4,6 @@ package model;
 // Represents a body of text that has text.
 public class BodyText {
     private String text;
-    private ReplacePair r;
 
     //EFFECTS: constructs a body of text containing text
     public BodyText(String text) {
