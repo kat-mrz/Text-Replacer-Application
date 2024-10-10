@@ -7,12 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BodyTextTest {
     private BodyText b;
-    private ReplacePair r;
+    private ReplacePair r1;
+    private ReplacePair r2;
 
     @BeforeEach
     void runBefore() {
         b = new BodyText("hello, how are you?");
-        r = new ReplacePair("hello", "hi");
+        r1 = new ReplacePair("hello", "hi");
+        r2 = new ReplacePair("good day", "howdy");
     }
 
     @Test
@@ -22,13 +24,14 @@ public class BodyTextTest {
 
     @Test
     void testReplace() {
-        b.replace();
+        b.replace(r1);
         assertEquals("hi, how are you?", b.getText());
     }
 
     @Test
     void testGetContainsReplacee() {
-        assertTrue(b.getContainsReplacee(r));
+        assertTrue(b.getContainsReplacee(r1));
+        assertFalse(b.getContainsReplacee(r2));
     }
 
 }
