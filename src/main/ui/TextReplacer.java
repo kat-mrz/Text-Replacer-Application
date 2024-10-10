@@ -3,13 +3,13 @@ package ui;
 import model.ReplacePair;
 import model.BodyText;
 
-
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TextReplacer {
     private List<ReplacePair> repPairs;
+    private int currentPairIndex = 0;
     private Scanner input;
     private BodyText bt;
     private boolean isCaseSensitive;
@@ -24,19 +24,23 @@ public class TextReplacer {
     }
 
     //MODIFIES: this
-    //EFFECTS: initializes scanner and list of replace pairs.
+    //EFFECTS: initializes scanner and list of replace pairs
     public void init() {
         this.input = new Scanner(System.in);
         this.repPairs = new ArrayList<>();
         this.isCaseSensitive = false;
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds a new body text
     public void newBodyText(BodyText bt) {
         System.out.println("Enter your body text below this line.");
         String text = this.input.nextLine();
         this.bt = new BodyText(text);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds a new replacePair to the list of existing replacePairs
     public void newReplacePair() {
         System.out.println("Enter the word you would like to replace below this line.");
         String replacee = this.input.nextLine();
@@ -54,6 +58,7 @@ public class TextReplacer {
         
     }
 
+    //EFFECT: displays and processes user's menu input
     public void runMenu() {
         System.out.println("Enter 'v' to view current body text.");
         System.out.println("Enter 'a' to add a word to replace.");
@@ -82,8 +87,5 @@ public class TextReplacer {
 
         runMenu();
     }
-
-
-
 
 }
