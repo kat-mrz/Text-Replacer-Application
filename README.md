@@ -9,5 +9,5 @@ This application is very versatile, but would be particularly useful for people 
 ## User Stories
 - As a user, I want to be able to add a body of text to replace words from.
 - As a user, I want to be able to add a replaced/replacer word pairing to a list of word pairings.
-- As a user, I want to be able to select a replaced/replacer word pairing and edit either word.
+- As a user, I want to be able to view my history of words that I have replaced and which word was replaced.
 - As a user, I want to be able to toggle case sensitivity on/off.

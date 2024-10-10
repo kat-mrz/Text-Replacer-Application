@@ -9,7 +9,6 @@ import java.util.List;
 
 public class TextReplacer {
     private List<ReplacePair> repPairs;
-    private int currentPairIndex = 0;
     private Scanner input;
     private BodyText bt;
     private boolean isCaseSensitive;
@@ -62,7 +61,7 @@ public class TextReplacer {
     public void runMenu() {
         System.out.println("Enter 'v' to view current body text.");
         System.out.println("Enter 'a' to add a word to replace.");
-        System.out.println("Enter 'e' to edit a word replacement.");
+        System.out.println("Enter 'h' to view your change history.");
         System.out.println("Enter 'c' to toggle case sensitivity on/off.");
         String choice = this.input.nextLine();
         if (choice.equalsIgnoreCase("v")) {
@@ -71,8 +70,8 @@ public class TextReplacer {
         else if (choice.equalsIgnoreCase("a")) {
             newReplacePair();
         }
-        else if (choice.equalsIgnoreCase("e")) {
-            //stub
+        else if (choice.equalsIgnoreCase("h")) {
+            viewHistory();
         }
         else if (choice.equalsIgnoreCase("c")); {
             if (isCaseSensitive == false) {
@@ -84,7 +83,20 @@ public class TextReplacer {
                 System.out.println("Case sensitivity is now off!");
             }
         }
+        runMenu();        
+    }
 
+    //MODIFIES: this
+    //EFFECTS: displays all replacer words and prompts user to edit a selected word.
+    public void viewHistory() {
+        if (repPairs.size() == 0) {
+            System.out.println("No words have been replaced. Redirecting to menu.");
+        }
+        else {
+            for (ReplacePair currentrp : this.repPairs) {
+                System.out.println("Replaced " + currentrp.getReplacee() + " with " + currentrp.getReplacer() + ".");
+            }
+        }
         runMenu();
     }
 
