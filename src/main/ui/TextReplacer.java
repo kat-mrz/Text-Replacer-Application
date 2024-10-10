@@ -12,6 +12,7 @@ public class TextReplacer {
     private List<ReplacePair> repPairs;
     private Scanner input;
     private BodyText bt;
+    private boolean isCaseSensitive;
 
     //EFFECTS: instantiates the TextReplacer application
     public TextReplacer() {
@@ -27,6 +28,7 @@ public class TextReplacer {
     public void init() {
         this.input = new Scanner(System.in);
         this.repPairs = new ArrayList<>();
+        this.isCaseSensitive = false;
     }
 
     public void newBodyText(BodyText bt) {
@@ -43,6 +45,13 @@ public class TextReplacer {
 
         ReplacePair rp = new ReplacePair(replacee, replacer);
         this.repPairs.add(rp);
+        if (isCaseSensitive == false) {
+            bt.replaceIgnoreCase(rp);
+        }
+        else {
+            bt.replace(rp);
+        }
+        
     }
 
     public void runMenu() {
@@ -60,8 +69,15 @@ public class TextReplacer {
         else if (choice.equalsIgnoreCase("e")) {
             //stub
         }
-        else if ( choice.equalsIgnoreCase("c")); {
-            //stub
+        else if (choice.equalsIgnoreCase("c")); {
+            if (isCaseSensitive == false) {
+                isCaseSensitive = true;
+                System.out.println("Case sensitivity is now on!");
+            }
+            else {
+                isCaseSensitive = false;
+                System.out.println("Case sensitivity is now off!");
+            }
         }
 
         runMenu();
