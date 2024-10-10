@@ -9,32 +9,29 @@ public class ReplacePairTest {
 
     @BeforeEach
     void runBefore() {
-        //stub
+        rp = new ReplacePair("hi", "hello");
     }
 
     @Test
     void testConstructor() {
-        //stub
-    }
-
-    @Test
-    void testGetReplacer() {
-        //stub
-    }
-
-    @Test
-    void testGetReplacee() {
-        //stub
+        assertEquals("hi", rp.getReplacee());
+        assertEquals("hello", rp.getReplacer());
     }
 
     @Test
     void testSetReplacer() {
-        //stub
+        rp.setReplacer("howdy");
+        assertEquals("howdy", rp.getReplacer());
+        rp.setReplacer("hola");
+        assertEquals("hola", rp.getReplacer());
     }
 
     @Test
     void testSetReplacee() {
-        //stub
+        rp.setReplacee("hiya");
+        assertEquals("hiya", rp.getReplacee());
+        rp.setReplacee("nihao");
+        assertEquals("nihao", rp.getReplacee());
     }
     
 }
