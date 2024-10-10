@@ -1,6 +1,5 @@
 package model;
 
-
 // Represents a body of text that has text.
 public class BodyText {
     private String text;
@@ -10,11 +9,16 @@ public class BodyText {
         this.text = text;
     }
 
-    //REQUIRES: getContainsReplacee() == true
     //MODIFIES: this
     //EFFECTS: replaces every occurence of replacee in text with replacer.
     public void replace(ReplacePair r) {
         text = text.replace(r.getReplacee(), r.getReplacer());
+    }
+
+    //MODIFIES: this
+    //EFFECTS: replaces every occurence of replacee in text with replacer.
+    public void replaceIgnoreCase(ReplacePair r) {
+        text = text.replaceAll("(?i)"+r.getReplacee(), r.getReplacer());
     }
 
     public String getText() {
