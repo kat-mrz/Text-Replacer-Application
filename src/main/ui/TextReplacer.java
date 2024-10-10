@@ -66,24 +66,20 @@ public class TextReplacer {
         String choice = this.input.nextLine();
         if (choice.equalsIgnoreCase("v")) {
             System.out.println("Here is your body text:\n" + bt.getText());
+            runMenu();
         }
         else if (choice.equalsIgnoreCase("a")) {
             newReplacePair();
+            runMenu();
         }
         else if (choice.equalsIgnoreCase("h")) {
             viewHistory();
+            runMenu();
         }
         else if (choice.equalsIgnoreCase("c")); {
-            if (isCaseSensitive == false) {
-                isCaseSensitive = true;
-                System.out.println("Case sensitivity is now on!");
-            }
-            else {
-                isCaseSensitive = false;
-                System.out.println("Case sensitivity is now off!");
-            }
-        }
-        runMenu();        
+            toggle();
+            runMenu();
+        }      
     }
 
     //MODIFIES: this
@@ -98,6 +94,17 @@ public class TextReplacer {
             }
         }
         runMenu();
+    }
+
+    public void toggle() {
+        if (isCaseSensitive == false) {
+            isCaseSensitive = true;
+            System.out.println("Case sensitivity is now on!");
+        }
+        else {
+            isCaseSensitive = false;
+            System.out.println("Case sensitivity is now off!");
+        }
     }
 
 }
