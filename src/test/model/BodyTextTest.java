@@ -9,12 +9,14 @@ public class BodyTextTest {
     private BodyText b;
     private ReplacePair r1;
     private ReplacePair r2;
+    private ReplacePair r3;
 
     @BeforeEach
     void runBefore() {
         b = new BodyText("hello, how are you?");
         r1 = new ReplacePair("hello", "hi");
         r2 = new ReplacePair("good day", "howdy");
+        r3 = new ReplacePair("HELLO", "hi");
     }
 
     @Test
@@ -25,6 +27,12 @@ public class BodyTextTest {
     @Test
     void testReplace() {
         b.replace(r1);
+        assertEquals("hi, how are you?", b.getText());
+    }
+
+    @Test
+    void testReplaceIgnoreCase() {
+        b.replaceIgnoreCase(r3);
         assertEquals("hi, how are you?", b.getText());
     }
 
