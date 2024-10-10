@@ -18,7 +18,7 @@ public class TextReplacer {
         init();
         
         newBodyText(bt);
-        newReplacePair();
+        runMenu();
         
     }
 
@@ -43,6 +43,28 @@ public class TextReplacer {
 
         ReplacePair rp = new ReplacePair(replacee, replacer);
         this.repPairs.add(rp);
+    }
+
+    public void runMenu() {
+        System.out.println("Enter 'v' to view current body text.");
+        System.out.println("Enter 'a' to add a word to replace.");
+        System.out.println("Enter 'e' to edit a word replacement.");
+        System.out.println("Enter 'c' to toggle case sensitivity on/off.");
+        String choice = this.input.nextLine();
+        if (choice.equalsIgnoreCase("v")) {
+            System.out.println("Here is your body text:\n" + bt.getText());
+        }
+        else if (choice.equalsIgnoreCase("a")) {
+            newReplacePair();
+        }
+        else if (choice.equalsIgnoreCase("e")) {
+            //stub
+        }
+        else if ( choice.equalsIgnoreCase("c")); {
+            //stub
+        }
+
+        runMenu();
     }
 
 
