@@ -7,25 +7,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BodyTextTest {
     private BodyText b;
+    private ReplacePair r;
 
     @BeforeEach
     void runBefore() {
-        //stub
+        b = new BodyText("hello, how are you?");
+        r = new ReplacePair("hello", "hi");
     }
 
     @Test
     void testConstructor() {
-        //stub
+        assertEquals("hello, how are you?", b.getText());
     }
 
     @Test
     void testReplace() {
-        //stub
+        b.replace();
+        assertEquals("hi, how are you?", b.getText());
     }
 
     @Test
-    void testGetText() {
-        //stub
+    void testGetContainsReplacee() {
+        assertTrue(b.getContainsReplacee(r));
     }
 
 }
