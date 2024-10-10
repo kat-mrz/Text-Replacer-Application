@@ -20,11 +20,11 @@ public class ReplacePair {
         return this.replacer;
     }
 
-    public void setReplacee() {
-        //stub
+    public void setReplacee(String r) {
+        replacee = r;
     }
 
-    public void setReplacer() {
-        //stub
+    public void setReplacer(String r) {
+        replacer = r;
     }
 }
