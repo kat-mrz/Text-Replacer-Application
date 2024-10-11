@@ -1,11 +1,12 @@
 package model;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ReplacePairTest {
-    private ReplacePair rp; 
+    private ReplacePair rp;
 
     @BeforeEach
     void runBefore() {
@@ -33,5 +34,5 @@ public class ReplacePairTest {
         rp.setReplacee("nihao");
         assertEquals("nihao", rp.getReplacee());
     }
-    
+
 }
