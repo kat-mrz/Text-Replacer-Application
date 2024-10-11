@@ -81,7 +81,9 @@ public class TextReplacer {
         } else if (choice.equalsIgnoreCase("c"))
             ;
         {
-            toggle();
+            if (choice.equalsIgnoreCase("c")) {
+                toggle();
+            }
             runMenu();
         }
     }
