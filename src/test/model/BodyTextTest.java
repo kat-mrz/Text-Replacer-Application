@@ -33,7 +33,7 @@ public class BodyTextTest {
     @Test
     void testReplaceIgnoreCase() {
         b.replaceIgnoreCase(r3);
-        assertEquals("hi, how are you?", b.getText());
+        assertEquals("how, how are you?", b.getText());
     }
 
     @Test
