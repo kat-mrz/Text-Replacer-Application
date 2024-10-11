@@ -16,7 +16,7 @@ public class BodyTextTest {
         b = new BodyText("hello, how are you?");
         r1 = new ReplacePair("hello", "hi");
         r2 = new ReplacePair("good day", "howdy");
-        r3 = new ReplacePair("HELLO", "hi");
+        r3 = new ReplacePair("HELLO", "how");
     }
 
     @Test
@@ -40,6 +40,12 @@ public class BodyTextTest {
     void testGetContainsReplacee() {
         assertTrue(b.getContainsReplacee(r1));
         assertFalse(b.getContainsReplacee(r2));
+    }
+
+    @Test
+    void testGetContainsReplacer() {
+        assertTrue(b.getContainsReplacer(r3));
+        assertFalse(b.getContainsReplacer(r2));
     }
 
 }

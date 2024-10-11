@@ -33,4 +33,11 @@ public class BodyText {
         }
     }
 
+    public boolean getContainsReplacer(ReplacePair r) {
+        if (text.contains(r.getReplacer())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

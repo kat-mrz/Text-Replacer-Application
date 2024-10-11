@@ -47,11 +47,17 @@ public class TextReplacer {
         String replacer = this.input.nextLine();
 
         ReplacePair rp = new ReplacePair(replacee, replacer);
-        this.repPairs.add(rp);
         if (isCaseSensitive == false) {
             bt.replaceIgnoreCase(rp);
         } else {
             bt.replace(rp);
+
+        }
+
+        if (bt.getContainsReplacer(rp) == true) {
+            this.repPairs.add(rp);
+        } else {
+            System.out.println("This body text does not contain your replacee word and was not able to replace.");
         }
 
     }
