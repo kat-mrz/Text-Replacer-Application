@@ -11,3 +11,5 @@ This application is very versatile, but would be particularly useful for people 
 - As a user, I want to be able to add a replaced/replacer word pairing to a list of word pairings.
 - As a user, I want to be able to list all the replacer word pairings in my list of pairings as a report of my history.
 - As a user, I want to be able to toggle case sensitivity on/off.
+- As a user, I want to be able to save my current body text, replace history, and case sensitivity settings (if I so choose)
+- As a user, I want to be able to be able to load my previous body text, replace history, and case sensitivity settings from file (if I so choose)
