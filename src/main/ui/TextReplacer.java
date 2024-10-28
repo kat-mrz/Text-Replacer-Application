@@ -1,17 +1,17 @@
 package ui;
 
 import model.ReplacePair;
+import model.ReplacementManager;
 import model.BodyText;
 
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TextReplacer {
-    private List<ReplacePair> repPairs;
+    private ReplacementManager repMan;
     private Scanner input;
     private BodyText bt;
     private boolean isCaseSensitive;
+    private ReplacePair rp;
 
     // EFFECTS: instantiates the TextReplacer application
     public TextReplacer() {
@@ -26,8 +26,9 @@ public class TextReplacer {
     // EFFECTS: initializes scanner and list of replace pairs
     public void init() {
         this.input = new Scanner(System.in);
-        this.repPairs = new ArrayList<>();
+        this.repMan = new ReplacementManager();
         this.isCaseSensitive = false;
+        this.rp = null;
     }
 
     // MODIFIES: this
@@ -46,16 +47,16 @@ public class TextReplacer {
         System.out.println("Enter the word you would like to replace it with below this line.");
         String replacer = this.input.nextLine();
 
-        ReplacePair rp = new ReplacePair(replacee, replacer);
+        this.rp = new ReplacePair(replacee, replacer);
+        repMan.setPossibleRepPair(rp);
         if (isCaseSensitive == false) {
-            bt.replaceIgnoreCase(rp);
+            bt.replaceIgnoreCase(repMan.getPossibleRepPair());
         } else {
-            bt.replace(rp);
-
+            bt.replace(repMan.getPossibleRepPair());
         }
 
-        if (bt.getContainsReplacer(rp) == true) {
-            this.repPairs.add(rp);
+        if (bt.getContainsReplacer(repMan.getPossibleRepPair()) == true) {
+            repMan.addRepPair(rp);
         } else {
             System.out.println("This body text does not contain your replacee word and was not able to replace.");
         }
@@ -78,9 +79,7 @@ public class TextReplacer {
         } else if (choice.equalsIgnoreCase("h")) {
             viewHistory();
             runMenu();
-        } else if (choice.equalsIgnoreCase("c"))
-            ;
-        {
+        } else if (choice.equalsIgnoreCase("c")) {
             if (choice.equalsIgnoreCase("c")) {
                 toggle();
             }
@@ -92,14 +91,15 @@ public class TextReplacer {
     // EFFECTS: displays all replacer words and prompts user to edit a selected
     // word.
     public void viewHistory() {
-        if (repPairs.size() == 0) {
+        if (repMan.getRepPairs().size() == 0) {
             System.out.println("No words have been replaced. Redirecting to menu.");
         } else {
-            for (ReplacePair currentRepPair : this.repPairs) {
+            for (ReplacePair currentRepPair : repMan.getRepPairs()) {
                 System.out.println(
                         "Replaced " + currentRepPair.getReplacee() + " with " + currentRepPair.getReplacer() + ".");
             }
         }
+
         runMenu();
     }
 
