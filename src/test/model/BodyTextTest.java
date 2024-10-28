@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BodyTextTest {
-    private BodyText b;
+    private BodyText testbt;
     private ReplacePair r1;
     private ReplacePair r2;
     private ReplacePair r3;
 
     @BeforeEach
     void runBefore() {
-        b = new BodyText("hello, how are you?");
+        testbt = new BodyText("hello, how are you?");
         r1 = new ReplacePair("hello", "hi");
         r2 = new ReplacePair("good day", "howdy");
         r3 = new ReplacePair("HELLO", "how");
@@ -21,31 +21,31 @@ public class BodyTextTest {
 
     @Test
     void testConstructor() {
-        assertEquals("hello, how are you?", b.getText());
+        assertEquals("hello, how are you?", testbt.getText());
     }
 
     @Test
     void testReplace() {
-        b.replace(r1);
-        assertEquals("hi, how are you?", b.getText());
+        testbt.replace(r1);
+        assertEquals("hi, how are you?", testbt.getText());
     }
 
     @Test
     void testReplaceIgnoreCase() {
-        b.replaceIgnoreCase(r3);
-        assertEquals("how, how are you?", b.getText());
+        testbt.replaceIgnoreCase(r3);
+        assertEquals("how, how are you?", testbt.getText());
     }
 
     @Test
     void testGetContainsReplacee() {
-        assertTrue(b.getContainsReplacee(r1));
-        assertFalse(b.getContainsReplacee(r2));
+        assertTrue(testbt.getContainsReplacee(r1));
+        assertFalse(testbt.getContainsReplacee(r2));
     }
 
     @Test
     void testGetContainsReplacer() {
-        assertTrue(b.getContainsReplacer(r3));
-        assertFalse(b.getContainsReplacer(r2));
+        assertTrue(testbt.getContainsReplacer(r3));
+        assertFalse(testbt.getContainsReplacer(r2));
     }
 
 }
