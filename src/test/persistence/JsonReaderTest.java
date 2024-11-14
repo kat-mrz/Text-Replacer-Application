@@ -25,7 +25,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            ReplacementManager repMan = reader.read();
+            ReplacementManager repMan = reader.RMread();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -36,7 +36,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderEmptyReplacementManager() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyReplacementManager.json");
         try {
-            ReplacementManager repMan = reader.read();
+            ReplacementManager repMan = reader.RMread();
             assertEquals(emptyList, repMan.getRepPairs());
             assertEquals(0, repMan.getRepPairs().size());
         } catch (IOException e) {
@@ -48,7 +48,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderGeneralReplacementManager() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralReplacementManager.json");
         try {
-            ReplacementManager repMan = reader.read();
+            ReplacementManager repMan = reader.RMread();
             List<ReplacePair> repPairs = repMan.getRepPairs();
             assertEquals(2, repPairs.size());
             assertEquals(2, repMan.getRepPairs().size());

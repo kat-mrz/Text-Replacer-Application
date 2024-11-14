@@ -24,10 +24,18 @@ public class JsonReader {
 
     // EFFECTS: reads ReplacementManager from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public ReplacementManager read() throws IOException {
+    public ReplacementManager RMread() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseReplacementManager(jsonObject);
+    }
+
+    // EFFECTS: reads BodyText from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public BodyText BTread() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseBodyText(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -66,4 +74,11 @@ public class JsonReader {
         ReplacePair rp = new ReplacePair(replacee, replacer);
         repMan.addRepPair(rp);
     }   
+
+    // EFFECTS: parses body text from JSON object and returns it
+    private BodyText parseBodyText(JSONObject jsonObject) {
+        String text = jsonObject.getString("body text");
+        BodyText bt = new BodyText(text);
+        return bt;
+    }
 }

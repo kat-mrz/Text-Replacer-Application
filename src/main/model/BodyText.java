@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a body of text that has text.
-public class BodyText {
+public class BodyText implements Writable {
     private String text;
 
     // EFFECTS: constructs a body of text containing text
@@ -39,5 +43,12 @@ public class BodyText {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("body text", text);
+        return json;
     }
 }

@@ -1,5 +1,6 @@
 package persistence;
 
+import model.BodyText;
 import model.ReplacementManager;
 import org.json.JSONObject;
 
@@ -27,6 +28,13 @@ public class JsonWriter {
     // writes JSON representation of ReplacementManager to file
     public void write(ReplacementManager repMan) {
         JSONObject json = repMan.toJson();
+        saveToFile(json.toString(TAB));
+    }
+
+    // MODIFIES: this
+    // writes JSON representation of BodyText to file
+    public void write(BodyText bt) {
+        JSONObject json = bt.toJson();
         saveToFile(json.toString(TAB));
     }
 

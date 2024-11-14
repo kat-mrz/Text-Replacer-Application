@@ -147,7 +147,7 @@ public class TextReplacer {
     // EFFECTS: loads replacement manager from file
     private void loadReplacementManager() {
         try {
-            repMan = jsonReader.read();
+            repMan = jsonReader.RMread();
             System.out.println("Loaded replacement manager from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

@@ -43,7 +43,7 @@ public class JsonWriterTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyReplacementManager.json");
-            repMan = reader.read();
+            repMan = reader.RMread();
             assertEquals(emptyList, repMan.getRepPairs());
             assertEquals(0, repMan.getRepPairs().size());
         } catch (IOException e) {
@@ -65,7 +65,7 @@ public class JsonWriterTest {
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralReplacementManager.json");
-            repMan = reader.read();
+            repMan = reader.RMread();
             List<ReplacePair> repPairs = repMan.getRepPairs();
             assertEquals(2, repPairs.size());
             assertEquals("hello", repPairs.get(0).getReplacee());
