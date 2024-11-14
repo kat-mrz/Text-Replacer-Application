@@ -38,6 +38,7 @@ public class JsonReaderTest extends JsonTest {
         try {
             ReplacementManager repMan = reader.read();
             assertEquals(emptyList, repMan.getRepPairs());
+            assertEquals(0, repMan.getRepPairs().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
@@ -50,6 +51,7 @@ public class JsonReaderTest extends JsonTest {
             ReplacementManager repMan = reader.read();
             List<ReplacePair> repPairs = repMan.getRepPairs();
             assertEquals(2, repPairs.size());
+            assertEquals(2, repMan.getRepPairs().size());
             assertEquals("hi", repPairs.get(0).getReplacee());
             assertEquals("hello", repPairs.get(0).getReplacer());
             assertEquals("hello", repPairs.get(1).getReplacee());
