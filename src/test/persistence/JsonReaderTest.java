@@ -22,10 +22,21 @@ public class JsonReaderTest extends JsonTest {
     }
     
     @Test
-    void testReaderNonExistentFile() {
+    void testReaderNonExistentFileRM() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
             ReplacementManager repMan = reader.RMread();
+            fail("IOException expected");
+        } catch (IOException e) {
+            // pass
+        }
+    }
+
+    @Test
+    void testReaderNonExistentFileBT() {
+        JsonReader reader = new JsonReader("./data/noSuchFile.json");
+        try {
+            BodyText bt = reader.BTread();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -45,6 +56,17 @@ public class JsonReaderTest extends JsonTest {
     }
 
     @Test
+    void testReaderEmptyBodyText() {
+        JsonReader reader = new JsonReader("./data/testReaderEmptyBodyText.json");
+        try {
+            BodyText bt = reader.BTread();
+            assertEquals("", bt.getText());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
     void testReaderGeneralReplacementManager() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralReplacementManager.json");
         try {
@@ -56,6 +78,17 @@ public class JsonReaderTest extends JsonTest {
             assertEquals("hello", repPairs.get(0).getReplacer());
             assertEquals("hello", repPairs.get(1).getReplacee());
             assertEquals("howdy", repPairs.get(1).getReplacer());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderGeneralBodyText() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralBodyText.json");
+        try {
+            BodyText bt = reader.BTread();
+            assertEquals("hi hello nihao", bt.getText());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

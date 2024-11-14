@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonWriterTest {
     private List<ReplacePair> emptyList;
+    private String text;
 
     @BeforeEach
     void runBefore() {
@@ -22,7 +23,7 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testWriterInvalidFile() {
+    void testWriterInvalidFileRM() {
         try {
             ReplacementManager repMan = new ReplacementManager();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
@@ -34,12 +35,24 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterInvalidFileBT() {
+        try {
+            BodyText bt = new BodyText(text);
+            JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
+            writer.open();
+            fail("IOException was expected");
+        } catch (IOException e) {
+            // pass
+        }
+    }
+
+    @Test
+    void testWriterEmptyReplacementManager() {
         try {
             ReplacementManager repMan = new ReplacementManager();
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyReplacementManager.json");
             writer.open();
-            writer.write(repMan);
+            writer.RMwrite(repMan);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyReplacementManager.json");
@@ -52,7 +65,25 @@ public class JsonWriterTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralBodyText() {
+        try {
+            text = "hi hello";
+            BodyText bt = new BodyText(text);
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralBodyText.json");
+            writer.open();
+            writer.BTwrite(bt);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterGeneralBodyText.json");
+            bt = reader.BTread();
+            assertEquals(text, bt.getText());
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+    @Test
+    void testWriterGeneralReplacementManager() {
         try {
             ReplacementManager repMan = new ReplacementManager();
             ReplacePair rp1 = new ReplacePair("hello", "nihao");
@@ -61,7 +92,7 @@ public class JsonWriterTest {
             repMan.addRepPair(rp2);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralReplacementManager.json");
             writer.open();
-            writer.write(repMan);
+            writer.RMwrite(repMan);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralReplacementManager.json");
