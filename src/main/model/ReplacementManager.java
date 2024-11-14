@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReplacementManager {
+public class ReplacementManager implements Writable {
     private List<ReplacePair> repPairs;
     private ReplacePair possibleRepPair;
 
@@ -37,6 +41,24 @@ public class ReplacementManager {
         } else {
             return null;
         }
+    }   
+
+    
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("rep pairs", repPairsToJson());
+        return json;
+    }
         
-    }    
+    // EFFECTS: returns repPairs in this ReplacementManager as a JSON array
+    private JSONArray repPairsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (ReplacePair rp : repPairs) {
+            jsonArray.put(rp.toJson());
+        }
+
+        return jsonArray;
+    }
 }

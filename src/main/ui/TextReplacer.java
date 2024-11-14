@@ -5,8 +5,17 @@ import model.ReplacementManager;
 import model.BodyText;
 
 import java.util.Scanner;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
 public class TextReplacer {
+    private static final String JSON_STORE = "./data/replacementmanager.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     private ReplacementManager repMan;
     private Scanner input;
     private BodyText bt;
@@ -14,7 +23,7 @@ public class TextReplacer {
     private ReplacePair rp;
 
     // EFFECTS: instantiates the TextReplacer application
-    public TextReplacer() {
+    public TextReplacer() throws FileNotFoundException {
         init();
 
         newBodyText(bt);
@@ -29,6 +38,8 @@ public class TextReplacer {
         this.repMan = new ReplacementManager();
         this.isCaseSensitive = false;
         this.rp = null;
+        this.jsonWriter = new JsonWriter(JSON_STORE);
+        this.jsonReader = new JsonReader(JSON_STORE);
     }
 
     // MODIFIES: this
@@ -68,6 +79,8 @@ public class TextReplacer {
         System.out.println("Enter 'v' to view current body text.");
         System.out.println("Enter 'a' to add a word to replace.");
         System.out.println("Enter 'h' to view your change history.");
+        System.out.println("Enter 's' to save your history.");
+        System.out.println("Enter 'l' to load your history.");
         System.out.println("Enter 'c' to toggle case sensitivity on/off.");
         String choice = this.input.nextLine();
         if (choice.equalsIgnoreCase("v")) {
@@ -78,6 +91,12 @@ public class TextReplacer {
             runMenu();
         } else if (choice.equalsIgnoreCase("h")) {
             viewHistory();
+            runMenu();
+        } else if (choice.equalsIgnoreCase("s")) {
+            saveReplacementManager();
+            runMenu();
+        } else if (choice.equalsIgnoreCase("l")) {
+            loadReplacementManager();
             runMenu();
         } else if (choice.equalsIgnoreCase("c")) {
             if (choice.equalsIgnoreCase("c")) {
@@ -110,6 +129,28 @@ public class TextReplacer {
         } else {
             isCaseSensitive = false;
             System.out.println("Case sensitivity is now off!");
+        }
+    }
+
+    // EFFECTS: saves the replacement manager to file
+    private void saveReplacementManager() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(repMan);
+            jsonWriter.close();
+            System.out.println("Saved replacement manager to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: loads replacement manager from file
+    private void loadReplacementManager() {
+        try {
+            repMan = jsonReader.read();
+            System.out.println("Loaded replacement manager from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 

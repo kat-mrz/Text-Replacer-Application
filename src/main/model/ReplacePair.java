@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //Represents a word pairing having a
 //replacee word and a replacer word.
-public class ReplacePair {
+public class ReplacePair implements Writable {
     private String replacee;
     private String replacer;
 
@@ -28,4 +31,14 @@ public class ReplacePair {
     public void setReplacer(String r) {
         replacer = r;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("replacee", replacee);
+        json.put("replacer", replacer);
+        return json;
+    }
+
+
 }
