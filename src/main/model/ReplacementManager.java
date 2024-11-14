@@ -11,7 +11,8 @@ public class ReplacementManager implements Writable {
     private List<ReplacePair> repPairs;
     private ReplacePair possibleRepPair;
 
-    // EFFECTS: constructs a replacement manager with a list of replace pairs and a possible replace pair.
+    // EFFECTS: constructs a replacement manager with a list of replace pairs and a
+    // possible replace pair.
     public ReplacementManager() {
         this.repPairs = new ArrayList<>();
         this.possibleRepPair = null;
@@ -41,16 +42,15 @@ public class ReplacementManager implements Writable {
         } else {
             return null;
         }
-    }   
+    }
 
-    
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("rep pairs", repPairsToJson());
         return json;
     }
-        
+
     // EFFECTS: returns repPairs in this ReplacementManager as a JSON array
     private JSONArray repPairsToJson() {
         JSONArray jsonArray = new JSONArray();

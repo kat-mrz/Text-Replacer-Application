@@ -42,7 +42,7 @@ public class ReplacementManagerTest {
 
     @Test
     void testAddRepPair() {
-        //ReplacePair rp1 = new ReplacePair("hi", "hello");
+        // ReplacePair rp1 = new ReplacePair("hi", "hello");
         rpm.addRepPair(rp1);
         assertEquals(rp1, rpm.getLastRep());
         assertEquals(rp1List, rpm.getRepPairs());
@@ -88,5 +88,5 @@ public class ReplacementManagerTest {
         assertEquals(emptyList, rpm.getRepPairs());
         assertEquals(null, rpm.getLastRep());
     }
-    
+
 }

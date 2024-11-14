@@ -20,12 +20,12 @@ public class JsonReaderTest extends JsonTest {
     void runBefore() {
         emptyList = new ArrayList<ReplacePair>();
     }
-    
+
     @Test
     void testReaderNonExistentFileRM() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            ReplacementManager repMan = reader.RMread();
+            ReplacementManager repMan = reader.repManRead();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -36,7 +36,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFileBT() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            BodyText bt = reader.BTread();
+            BodyText bt = reader.bodyTextRead();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -47,7 +47,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderEmptyReplacementManager() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyReplacementManager.json");
         try {
-            ReplacementManager repMan = reader.RMread();
+            ReplacementManager repMan = reader.repManRead();
             assertEquals(emptyList, repMan.getRepPairs());
             assertEquals(0, repMan.getRepPairs().size());
         } catch (IOException e) {
@@ -59,7 +59,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderEmptyBodyText() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyBodyText.json");
         try {
-            BodyText bt = reader.BTread();
+            BodyText bt = reader.bodyTextRead();
             assertEquals("", bt.getText());
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -70,7 +70,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderGeneralReplacementManager() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralReplacementManager.json");
         try {
-            ReplacementManager repMan = reader.RMread();
+            ReplacementManager repMan = reader.repManRead();
             List<ReplacePair> repPairs = repMan.getRepPairs();
             assertEquals(2, repPairs.size());
             assertEquals(2, repMan.getRepPairs().size());
@@ -87,7 +87,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderGeneralBodyText() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralBodyText.json");
         try {
-            BodyText bt = reader.BTread();
+            BodyText bt = reader.bodyTextRead();
             assertEquals("hi hello nihao", bt.getText());
         } catch (IOException e) {
             fail("Couldn't read from file");

@@ -52,11 +52,11 @@ public class JsonWriterTest {
             ReplacementManager repMan = new ReplacementManager();
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyReplacementManager.json");
             writer.open();
-            writer.RMwrite(repMan);
+            writer.repManWrite(repMan);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyReplacementManager.json");
-            repMan = reader.RMread();
+            repMan = reader.repManRead();
             assertEquals(emptyList, repMan.getRepPairs());
             assertEquals(0, repMan.getRepPairs().size());
         } catch (IOException e) {
@@ -71,11 +71,11 @@ public class JsonWriterTest {
             BodyText bt = new BodyText(text);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralBodyText.json");
             writer.open();
-            writer.BTwrite(bt);
+            writer.bodyTextWrite(bt);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralBodyText.json");
-            bt = reader.BTread();
+            bt = reader.bodyTextRead();
             assertEquals(text, bt.getText());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -92,11 +92,11 @@ public class JsonWriterTest {
             repMan.addRepPair(rp2);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralReplacementManager.json");
             writer.open();
-            writer.RMwrite(repMan);
+            writer.repManWrite(repMan);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralReplacementManager.json");
-            repMan = reader.RMread();
+            repMan = reader.repManRead();
             List<ReplacePair> repPairs = repMan.getRepPairs();
             assertEquals(2, repPairs.size());
             assertEquals("hello", repPairs.get(0).getReplacee());
@@ -106,5 +106,5 @@ public class JsonWriterTest {
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
-    }    
+    }
 }

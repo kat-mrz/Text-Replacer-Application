@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -24,7 +23,7 @@ public class JsonReader {
 
     // EFFECTS: reads ReplacementManager from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public ReplacementManager RMread() throws IOException {
+    public ReplacementManager repManRead() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseReplacementManager(jsonObject);
@@ -32,7 +31,7 @@ public class JsonReader {
 
     // EFFECTS: reads BodyText from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public BodyText BTread() throws IOException {
+    public BodyText bodyTextRead() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseBodyText(jsonObject);
@@ -57,7 +56,8 @@ public class JsonReader {
     }
 
     // MODIFIES: repMan
-    // EFFECTS: parses replace pairs from JSON ibject and adds them to Replacement Manager
+    // EFFECTS: parses replace pairs from JSON ibject and adds them to Replacement
+    // Manager
     private void addRepPairs(ReplacementManager repMan, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("rep pairs");
         for (Object json : jsonArray) {
@@ -67,13 +67,14 @@ public class JsonReader {
     }
 
     // MODIFIES: repMan
-    // EFFECTS: parses replace pair from JSON object and adds it to Replacement Manager
+    // EFFECTS: parses replace pair from JSON object and adds it to Replacement
+    // Manager
     private void addRepPair(ReplacementManager repMan, JSONObject jsonObject) {
         String replacee = jsonObject.getString("replacee");
         String replacer = jsonObject.getString("replacer");
         ReplacePair rp = new ReplacePair(replacee, replacer);
         repMan.addRepPair(rp);
-    }   
+    }
 
     // EFFECTS: parses body text from JSON object and returns it
     private BodyText parseBodyText(JSONObject jsonObject) {

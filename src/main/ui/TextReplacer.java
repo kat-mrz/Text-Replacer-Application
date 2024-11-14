@@ -10,13 +10,14 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
 public class TextReplacer {
     private static final String JSON_STORE1 = "./data/replacementmanager.json";
     private static final String JSON_STORE2 = "./data/bodytext.json";
-    private JsonWriter jsonWriter1, jsonWriter2;
-    private JsonReader jsonReader1, jsonReader2;
+    private JsonWriter jsonWriter1;
+    private JsonWriter jsonWriter2;
+    private JsonReader jsonReader1;
+    private JsonReader jsonReader2;
     private ReplacementManager repMan;
     private Scanner input;
     private BodyText bt;
@@ -79,12 +80,7 @@ public class TextReplacer {
 
     // EFFECT: displays and processes user's menu input
     public void runMenu() {
-        System.out.println("Enter 'v' to view current body text.");
-        System.out.println("Enter 'a' to add a word to replace.");
-        System.out.println("Enter 'h' to view your change history.");
-        System.out.println("Enter 's' to save your body text and history.");
-        System.out.println("Enter 'l' to load your body text and history.");
-        System.out.println("Enter 'c' to toggle case sensitivity on/off.");
+        printMenu();
         String choice = this.input.nextLine();
         if (choice.equalsIgnoreCase("v")) {
             System.out.println("Here is your body text:\n" + bt.getText());
@@ -109,6 +105,15 @@ public class TextReplacer {
         }
     }
 
+    public void printMenu() {
+        System.out.println("Enter 'v' to view current body text.");
+        System.out.println("Enter 'a' to add a word to replace.");
+        System.out.println("Enter 'h' to view your change history.");
+        System.out.println("Enter 's' to save your body text and history.");
+        System.out.println("Enter 'l' to load your body text and history.");
+        System.out.println("Enter 'c' to toggle case sensitivity on/off.");
+    }
+
     // MODIFIES: this
     // EFFECTS: displays all replacer words and prompts user to edit a selected
     // word.
@@ -117,8 +122,8 @@ public class TextReplacer {
             System.out.println("No words have been replaced. Redirecting to menu.");
         } else {
             for (ReplacePair currentRepPair : repMan.getRepPairs()) {
-                System.out.println("Replaced " + currentRepPair.getReplacee() +
-                        " with " + currentRepPair.getReplacer() + ".");
+                System.out.println("Replaced " + currentRepPair.getReplacee()
+                        + " with " + currentRepPair.getReplacer() + ".");
             }
         }
 
@@ -140,8 +145,8 @@ public class TextReplacer {
         try {
             jsonWriter1.open();
             jsonWriter2.open();
-            jsonWriter1.RMwrite(repMan);
-            jsonWriter2.BTwrite(bt);
+            jsonWriter1.repManWrite(repMan);
+            jsonWriter2.bodyTextWrite(bt);
             jsonWriter1.close();
             jsonWriter2.close();
             System.out.println("Saved replacement manager to " + JSON_STORE1);
@@ -154,8 +159,8 @@ public class TextReplacer {
     // EFFECTS: loads replacement manager from file
     private void loadReplacementManager() {
         try {
-            repMan = jsonReader1.RMread();
-            bt = jsonReader2.BTread();
+            repMan = jsonReader1.repManRead();
+            bt = jsonReader2.bodyTextRead();
             System.out.println("Loaded replacement manager from " + JSON_STORE1);
             System.out.println("Loaded body text from " + JSON_STORE2);
         } catch (IOException e) {

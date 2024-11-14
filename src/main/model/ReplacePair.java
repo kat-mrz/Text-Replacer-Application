@@ -40,5 +40,4 @@ public class ReplacePair implements Writable {
         return json;
     }
 
-
 }
