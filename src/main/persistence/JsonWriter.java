@@ -26,14 +26,14 @@ public class JsonWriter {
 
     // MODIFIES: this
     // writes JSON representation of ReplacementManager to file
-    public void write(ReplacementManager repMan) {
+    public void RMwrite(ReplacementManager repMan) {
         JSONObject json = repMan.toJson();
         saveToFile(json.toString(TAB));
     }
 
     // MODIFIES: this
     // writes JSON representation of BodyText to file
-    public void write(BodyText bt) {
+    public void BTwrite(BodyText bt) {
         JSONObject json = bt.toJson();
         saveToFile(json.toString(TAB));
     }

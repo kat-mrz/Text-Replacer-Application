@@ -13,9 +13,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class TextReplacer {
-    private static final String JSON_STORE = "./data/replacementmanager.json";
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private static final String JSON_STORE1 = "./data/replacementmanager.json";
+    private static final String JSON_STORE2 = "./data/bodytext.json";
+    private JsonWriter jsonWriter1, jsonWriter2;
+    private JsonReader jsonReader1, jsonReader2;
     private ReplacementManager repMan;
     private Scanner input;
     private BodyText bt;
@@ -38,8 +39,10 @@ public class TextReplacer {
         this.repMan = new ReplacementManager();
         this.isCaseSensitive = false;
         this.rp = null;
-        this.jsonWriter = new JsonWriter(JSON_STORE);
-        this.jsonReader = new JsonReader(JSON_STORE);
+        this.jsonWriter1 = new JsonWriter(JSON_STORE1);
+        this.jsonReader1 = new JsonReader(JSON_STORE1);
+        this.jsonWriter2 = new JsonWriter(JSON_STORE2);
+        this.jsonReader2 = new JsonReader(JSON_STORE2);
     }
 
     // MODIFIES: this
@@ -79,8 +82,8 @@ public class TextReplacer {
         System.out.println("Enter 'v' to view current body text.");
         System.out.println("Enter 'a' to add a word to replace.");
         System.out.println("Enter 'h' to view your change history.");
-        System.out.println("Enter 's' to save your history.");
-        System.out.println("Enter 'l' to load your history.");
+        System.out.println("Enter 's' to save your body text and history.");
+        System.out.println("Enter 'l' to load your body text and history.");
         System.out.println("Enter 'c' to toggle case sensitivity on/off.");
         String choice = this.input.nextLine();
         if (choice.equalsIgnoreCase("v")) {
@@ -114,8 +117,8 @@ public class TextReplacer {
             System.out.println("No words have been replaced. Redirecting to menu.");
         } else {
             for (ReplacePair currentRepPair : repMan.getRepPairs()) {
-                System.out.println(
-                        "Replaced " + currentRepPair.getReplacee() + " with " + currentRepPair.getReplacer() + ".");
+                System.out.println("Replaced " + currentRepPair.getReplacee() +
+                        " with " + currentRepPair.getReplacer() + ".");
             }
         }
 
@@ -135,22 +138,28 @@ public class TextReplacer {
     // EFFECTS: saves the replacement manager to file
     private void saveReplacementManager() {
         try {
-            jsonWriter.open();
-            jsonWriter.write(repMan);
-            jsonWriter.close();
-            System.out.println("Saved replacement manager to " + JSON_STORE);
+            jsonWriter1.open();
+            jsonWriter2.open();
+            jsonWriter1.RMwrite(repMan);
+            jsonWriter2.BTwrite(bt);
+            jsonWriter1.close();
+            jsonWriter2.close();
+            System.out.println("Saved replacement manager to " + JSON_STORE1);
+            System.out.println("Saved body text to " + JSON_STORE2);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            System.out.println("Unable to write to file: " + JSON_STORE1 + " and/or " + JSON_STORE2);
         }
     }
 
     // EFFECTS: loads replacement manager from file
     private void loadReplacementManager() {
         try {
-            repMan = jsonReader.RMread();
-            System.out.println("Loaded replacement manager from " + JSON_STORE);
+            repMan = jsonReader1.RMread();
+            bt = jsonReader2.BTread();
+            System.out.println("Loaded replacement manager from " + JSON_STORE1);
+            System.out.println("Loaded body text from " + JSON_STORE2);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("Unable to read from file: " + JSON_STORE1 + " and/or " + JSON_STORE2);
         }
     }
 
