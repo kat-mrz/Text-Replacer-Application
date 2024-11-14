@@ -1,0 +1,12 @@
+{
+    "rep pairs": [
+        {
+            "replacee": "hi",
+            "replacer": "hello"
+        },
+        {
+            "replacee": "hello",
+            "replacer": "howdy"
+        }
+    ]
+}
