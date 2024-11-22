@@ -29,20 +29,14 @@ public class BodyText implements Writable {
         return this.text;
     }
 
+    // EFFECTS: Returns whether the text contains the replacee.
     public boolean getContainsReplacee(ReplacePair r) {
-        if (text.contains(r.getReplacee())) {
-            return true;
-        } else {
-            return false;
-        }
+        return text.contains(r.getReplacee());
     }
 
+    // EFFECTS: Returns whether the text contains the replacee.
     public boolean getContainsReplacer(ReplacePair r) {
-        if (text.contains(r.getReplacer())) {
-            return true;
-        } else {
-            return false;
-        }
+        return text.contains(r.getReplacer());
     }
 
     @Override

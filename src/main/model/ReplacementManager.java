@@ -36,6 +36,7 @@ public class ReplacementManager implements Writable {
         return repPairs;
     }
 
+    // EFFECTS: returns last rep pair in list of rep pairs. Returns null if list has no rep pairs.
     public ReplacePair getLastRep() {
         if (repPairs.size() > 0) {
             return repPairs.getLast();

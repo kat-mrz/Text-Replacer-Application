@@ -105,6 +105,7 @@ public class TextReplacer {
         }
     }
 
+    // EFFECTS: prints menu commands.
     public void printMenu() {
         System.out.println("Enter 'v' to view current body text.");
         System.out.println("Enter 'a' to add a word to replace.");
@@ -130,6 +131,8 @@ public class TextReplacer {
         runMenu();
     }
 
+    // MODIFIES: this
+    // EFFECTS: switches isCaseSensitive to true if false, and vice-versa.
     public void toggle() {
         if (isCaseSensitive == false) {
             isCaseSensitive = true;
