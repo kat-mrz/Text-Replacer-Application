@@ -13,3 +13,10 @@ This application is very versatile, but would be particularly useful for people 
 - As a user, I want to be able to toggle case sensitivity on/off.
 - As a user, I want to be able to save my current body text and replace history (if I so choose)
 - As a user, I want to be able to be able to load my previous body text and replace history from file (if I so choose)
+
+## Instructions for End User
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by inputting a valid word replacement and pressing the replace button. Successful changes should show up in the 2nd box from the left.
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by inputting an invalid word replacement and pressing the replace button. Unsuccessful changes should show up in the 3rd box from the left.
+- You can locate my visual component as the replace button.
+- You can save the state of my application by pressing the save button.
+- You can reload the state of my application by pressing the load button.
