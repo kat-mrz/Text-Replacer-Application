@@ -17,12 +17,16 @@ public class BodyText implements Writable {
     // EFFECTS: replaces every occurence of replacee in text with replacer.
     public void replace(ReplacePair r) {
         text = text.replace(r.getReplacee(), r.getReplacer());
+        EventLog.getInstance().logEvent(new Event(r.getReplacee() + " changed to " + r.getReplacer() + "."));
+        EventLog.getInstance().logEvent(new Event("Body text updated to " + text));
     }
 
     // MODIFIES: this
     // EFFECTS: replaces every occurence of replacee in text with replacer.
     public void replaceIgnoreCase(ReplacePair r) {
         text = text.replaceAll("(?i)" + r.getReplacee(), r.getReplacer());
+        EventLog.getInstance().logEvent(new Event(r.getReplacee() + " changed to " + r.getReplacer() + "."));
+        EventLog.getInstance().logEvent(new Event("Body text updated to " + text));
     }
 
     public String getText() {

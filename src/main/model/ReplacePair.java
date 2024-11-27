@@ -26,10 +26,12 @@ public class ReplacePair implements Writable {
 
     public void setReplacee(String r) {
         replacee = r;
+        EventLog.getInstance().logEvent(new Event("New replacee set."));
     }
 
     public void setReplacer(String r) {
         replacer = r;
+        EventLog.getInstance().logEvent(new Event("New replacer set."));
     }
 
     @Override
