@@ -20,3 +20,26 @@ This application is very versatile, but would be particularly useful for people 
 - You can locate my visual component as the replace button.
 - You can save the state of my application by pressing the save button.
 - You can reload the state of my application by pressing the load button.
+
+## Phase 4: Task 2
+Wed Nov 27 11:39:04 PST 2024
+Replacement manager created.
+---------------
+Wed Nov 27 11:39:59 PST 2024
+Hey changed to Hi there,.
+---------------
+Wed Nov 27 11:39:59 PST 2024
+Body text updated to Hi there, this is my application! Do you like it?
+---------------
+Wed Nov 27 11:39:59 PST 2024
+Replace pair added to history.
+---------------
+Wed Nov 27 11:40:18 PST 2024
+like changed to love.
+---------------
+Wed Nov 27 11:40:18 PST 2024
+Body text updated to Hi there, this is my application! Do you love it?
+---------------
+Wed Nov 27 11:40:18 PST 2024
+Replace pair added to history.
+---------------
