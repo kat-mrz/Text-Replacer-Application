@@ -63,11 +63,7 @@ public class TextReplacerUI extends JFrame implements WindowListener {
         this.replacee = new JTextField(10);
         this.replacer = new JTextField(10);
 
-        this.jsonWriter1 = new JsonWriter(JSON_STORE1);
-        this.jsonReader1 = new JsonReader(JSON_STORE1);
-        this.jsonWriter2 = new JsonWriter(JSON_STORE2);
-        this.jsonReader2 = new JsonReader(JSON_STORE2);
-
+        jsonReadWriteConstructor();
         buttonConstructor();
 
         this.repMan = new ReplacementManager();
@@ -79,6 +75,13 @@ public class TextReplacerUI extends JFrame implements WindowListener {
         addElements();
 
         frame.setVisible(true);
+    }
+
+    private void jsonReadWriteConstructor() {
+        this.jsonWriter1 = new JsonWriter(JSON_STORE1);
+        this.jsonReader1 = new JsonReader(JSON_STORE1);
+        this.jsonWriter2 = new JsonWriter(JSON_STORE2);
+        this.jsonReader2 = new JsonReader(JSON_STORE2);
     }
 
     // EFFECTS: constructs addButton, saveButton, and loadButton.
