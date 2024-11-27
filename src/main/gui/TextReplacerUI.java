@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,12 +14,13 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import model.BodyText;
+import model.EventLog;
 import model.ReplacePair;
 import model.ReplacementManager;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-public class TextReplacerUI extends JFrame {
+public class TextReplacerUI extends JFrame implements WindowListener {
     private static final int WIDTH = 900;
     private static final int HEIGHT = 600;
     private static final String JSON_STORE1 = "./data/replacementmanager.json";
@@ -40,6 +43,7 @@ public class TextReplacerUI extends JFrame {
     private JsonWriter jsonWriter2;
     private JsonReader jsonReader1;
     private JsonReader jsonReader2;
+    private EventLog eventLog;
 
     // EFFECTS: Constructs TextReplacerUI frame and instantiates fields
     public TextReplacerUI() throws IOException {
@@ -47,10 +51,12 @@ public class TextReplacerUI extends JFrame {
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.addWindowListener(this);
 
         this.panel = new JPanel();
         panel.setBackground(Color.decode("#80002A"));
 
+        this.eventLog = new EventLog();
         this.body = new JTextArea(30, 30);
         this.historyTextArea = new JTextArea(30, 10);
         this.unsuccessfulHistoryTextArea = new JTextArea(30, 10);
@@ -188,6 +194,42 @@ public class TextReplacerUI extends JFrame {
         } catch (IOException e) {
             System.out.println("file not found");
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        // Action not needed, left as stub
+    }
+
+    // EFFECTS: prints eventLog to console after gui window is closed.
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.out.println(eventLog.printEvents());
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        // Action not needed, left as stub
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        // Action not needed, left as stub
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        // Action not needed, left as stub
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        // Action not needed, left as stub
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        // Action not needed, left as stub
     }
 
 }
