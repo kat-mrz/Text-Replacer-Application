@@ -43,3 +43,7 @@ Body text updated to Hi there, this is my application! Do you love it?
 Wed Nov 27 11:40:18 PST 2024
 Replace pair added to history.
 ---------------
+
+## Phase 4: Task 3
+To refactor this project, I would likely improve the Single Responsibility Principle by splitting up the ReplacementManager class into two separate classes. Currently, the ReplacementManager class is acting as both a storage of successful replacements and the replacement pair that is referenced when checking for occurences in the body text. I would likely make a History class that would be a list of ReplacePairs to be my storage, and then make a Reference class to represent the pair that I am searching for in the body text.
+Furthermore, I enjoyed having a separate history for unsuccessful changes, so I would likely improve coupling by creating the History abstract class mentioned earlier, with UnsuccessfulHistory and SuccessfulHistory classes extending it.
