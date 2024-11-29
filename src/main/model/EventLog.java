@@ -56,6 +56,14 @@ public class EventLog implements Iterable<Event> {
         return printEventLog;
     }
 
+    /**
+	 * Clears the event log and logs the event.
+	 */
+	public void clear() {
+        theLog = new EventLog();
+		getInstance().logEvent(new Event("Event log cleared."));
+	}
+
     @Override
     public Iterator<Event> iterator() {
         return events.iterator();

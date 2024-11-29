@@ -38,6 +38,7 @@ public class TextReplacerUI extends JFrame implements WindowListener {
     private JButton addButton;
     private JButton saveButton;
     private JButton loadButton;
+    private JButton clearButton;
     private String unsuccessfulHistory;
     private JsonWriter jsonWriter1;
     private JsonWriter jsonWriter2;
@@ -72,6 +73,7 @@ public class TextReplacerUI extends JFrame implements WindowListener {
         addButtonBehaviour();
         loadButtonBehaviour();
         saveButtonBehaviour();
+        clearButtonBehaviour();
         addElements();
 
         frame.setVisible(true);
@@ -92,6 +94,7 @@ public class TextReplacerUI extends JFrame implements WindowListener {
 
         saveButton = new JButton("save");
         loadButton = new JButton("load");
+        clearButton = new JButton("clear log");
     }
 
     // EFFECTS: calls actionListener for addButton
@@ -160,6 +163,18 @@ public class TextReplacerUI extends JFrame implements WindowListener {
         });
     }
 
+    // EFFECTS: calls actionListener for clearButton
+    private void clearButtonBehaviour() {
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            // MODIFIES: this
+            // EFFECTS: when button is pressed, clears EventLog
+            public void actionPerformed(ActionEvent e) {
+                eventLog.clear();
+            }
+        });
+    }
+
     // EFFECTS: adds gui elements to panel, then adds panel to frame
     private void addElements() {
         panel.add(body);
@@ -170,6 +185,7 @@ public class TextReplacerUI extends JFrame implements WindowListener {
         panel.add(addButton);
         panel.add(saveButton);
         panel.add(loadButton);
+        panel.add(clearButton);
         frame.add(panel, BorderLayout.CENTER);
     }
 
